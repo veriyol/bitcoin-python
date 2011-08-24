@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting Started &mdash; bitcoin-python v0.2 documentation</title>
+    <title>bitcoinrpc.config — Utilities for reading bitcoin configuration files &mdash; bitcoin-python v0.2 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -20,8 +20,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="bitcoin-python v0.2 documentation" href="index.html" />
-    <link rel="next" title="Introduction" href="introduction.html" />
-    <link rel="prev" title="bitcoin-python - Easy-to-use Bitcoin API client." href="index.html" /> 
+    <link rel="up" title="API reference" href="apireference.html" />
+    <link rel="prev" title="bitcoinrpc.data — Bitcoin RPC service, data objects" href="bitcoinrpc.data.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,12 +34,10 @@
           <a href="modindex.html" title="Global Module Index"
              accesskey="M">modules</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="bitcoin-python - Easy-to-use Bitcoin API client."
+          <a href="bitcoinrpc.data.html" title="bitcoinrpc.data — Bitcoin RPC service, data objects"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">bitcoin-python v0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">bitcoin-python v0.2 documentation</a> &raquo;</li>
+          <li><a href="apireference.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -48,19 +46,21 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<ul>
-<li class="toctree-l1"><a class="reference external" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference external" href="usage.html">Usage</a><ul>
-<li class="toctree-l2"><a class="reference external" href="usage.html#setting-up-bitcoin-for-remote-control">Setting up bitcoin for remote control</a></li>
-<li class="toctree-l2"><a class="reference external" href="usage.html#connecting-to-the-wallet-from-python">Connecting to the wallet from Python</a></li>
-<li class="toctree-l2"><a class="reference external" href="usage.html#how-to-use-the-api">How to use the API</a></li>
-<li class="toctree-l2"><a class="reference external" href="usage.html#the-account-api">The account API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference external" href="examples.html">Examples</a></li>
-</ul>
+  <div class="section" id="module-bitcoinrpc.config">
+<h1><tt class="xref docutils literal"><span class="pre">bitcoinrpc.config</span></tt> &#8212; Utilities for reading bitcoin configuration files<a class="headerlink" href="#module-bitcoinrpc.config" title="Permalink to this headline">¶</a></h1>
+<p>Utilities for reading bitcoin configuration files.</p>
+<dl class="function">
+<dt id="bitcoinrpc.config.read_config_file">
+<tt class="descclassname">bitcoinrpc.config.</tt><tt class="descname">read_config_file</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#bitcoinrpc.config.read_config_file" title="Permalink to this definition">¶</a></dt>
+<dd>Read a simple <tt class="docutils literal"><span class="pre">'='</span></tt>-delimited config file.
+Raises <tt class="xref docutils literal"><span class="pre">IOError</span></tt> if unable to open file, or <tt class="xref docutils literal"><span class="pre">ValueError</span></tt>
+if an parse error occurs.</dd></dl>
+
+<dl class="function">
+<dt id="bitcoinrpc.config.read_default_config">
+<tt class="descclassname">bitcoinrpc.config.</tt><tt class="descname">read_default_config</tt><big>(</big><big>)</big><a class="headerlink" href="#bitcoinrpc.config.read_default_config" title="Permalink to this definition">¶</a></dt>
+<dd>Read bitcoin default configuration from the current user&#8217;s home directory.</dd></dl>
+
 </div>
 
 
@@ -70,14 +70,11 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <h4>Previous topic</h4>
-            <p class="topless"><a href="index.html"
-                                  title="previous chapter">bitcoin-python - Easy-to-use Bitcoin API client.</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="introduction.html"
-                                  title="next chapter">Introduction</a></p>
+            <p class="topless"><a href="bitcoinrpc.data.html"
+                                  title="previous chapter"><tt class="docutils literal"><span class="pre">bitcoinrpc.data</span></tt> &#8212; Bitcoin RPC service, data objects</a></p>
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="_sources/gettingstarted.txt"
+              <li><a href="_sources/bitcoinrpc.config.txt"
                      rel="nofollow">Show Source</a></li>
             </ul>
           <div id="searchbox" style="display: none">
@@ -107,12 +104,10 @@
           <a href="modindex.html" title="Global Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="bitcoin-python - Easy-to-use Bitcoin API client."
+          <a href="bitcoinrpc.data.html" title="bitcoinrpc.data — Bitcoin RPC service, data objects"
              >previous</a> |</li>
-        <li><a href="index.html">bitcoin-python v0.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">bitcoin-python v0.2 documentation</a> &raquo;</li>
+          <li><a href="apireference.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
