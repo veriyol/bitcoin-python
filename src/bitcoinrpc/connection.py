@@ -342,7 +342,12 @@ class BitcoinConnection(object):
         
         Returns hex-encoded raw transaction.
         
-        Example usage: createrawtransaction([{"txid": }])
+        Example usage:
+        >>> conn.createrawtransaction(
+                [{"txid": "a9d4599e15b53f3eb531608ddb31f48c695c3d0b3538a6bda871e8b34f2f430c",
+                  "vout":0}],
+                {"mkZBYBiq6DNoQEKakpMJegyDbw2YiNQnHT":50})
+
         
         Arguments:
 
