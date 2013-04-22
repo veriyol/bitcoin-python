@@ -196,7 +196,7 @@ _exception_map = {
 }
 
 
-def _wrap_exception(error):
+def wrap_exception(error):
     """
     Convert a JSON error object to a more specific Bitcoin exception.
     """
