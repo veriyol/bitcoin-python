@@ -72,7 +72,7 @@ class HTTPTransport(object):
 
         httpresp = self.connection.getresponse()
         if httpresp is None:
-            raise JSONRPCException({
+            self._raise_exception({
                 'code': -342, 'message': 'missing HTTP response from server'})
 
         resp = httpresp.read()
@@ -115,10 +115,10 @@ class RPCMethod(object):
         resp = self._service_proxy._transport.request(postdata)
         resp = json.loads(resp, parse_float=decimal.Decimal)
 
-        if resp['error'] != None:
-            raise JSONRPCException(resp['error'])
+        if resp['error'] is not None:
+            self._service_proxy._raise_exception(resp['error'])
         elif 'result' not in resp:
-            raise JSONRPCException({
+            self._service_proxy._raise_exception({
                 'code': -343, 'message': 'missing JSON-RPC result'})
         else:
             return resp['result']
@@ -128,11 +128,19 @@ class RPCMethod(object):
 
 
 class AuthServiceProxy(object):
-    def __init__(self, service_url, transport=None):
+    """
+    You can use custom transport to test your app's behavior without calling
+    the remote service.
+
+    exception_wrapper is a callable accepting a dictionary containing error
+    code and message and returning a suitable exception object.
+    """
+    def __init__(self, service_url, transport=None, exception_wrapper=None):
         self._service_url = service_url
         self._id_counter = 0
         self._transport = (HTTPTransport(service_url) if transport is None
                            else transport)
+        self._exception_wrapper = exception_wrapper
 
     def __getattr__(self, name):
         return RPCMethod(name, self)
@@ -143,3 +151,9 @@ class AuthServiceProxy(object):
         already taken by internal attribute.
         """
         return RPCMethod(name, self)
+
+    def _raise_exception(self, error):
+        if self._exception_wrapper is None:
+            raise JSONRPCException(error)
+        else:
+            raise self._exception_wrapper(error)
