@@ -64,11 +64,12 @@ class BitcoinException(Exception):
         Exception.__init__(self, error['message'])
         self.code = error['code']
 
+
 class TransportException(Exception):
     """
     Class to define transport-level failures.
     """
-    def __init__(self, msg, code = None, protocol = None, raw_detail = None):
+    def __init__(self, msg, code=None, protocol=None, raw_detail=None):
         self.msg = msg
         self.code = code
         self.protocol = protocol
@@ -77,10 +78,11 @@ class TransportException(Exception):
         Transport-level failure: {msg}
         Code: {code}
         Protocol: {protocol}
-        """.format(msg = msg, code = code, protocol = protocol)
+        """.format(msg=msg, code=code, protocol=protocol)
 
     def __str__(self):
-       return self.s
+        return self.s
+
 
 ##### General application defined errors
 class SafeMode(BitcoinException):
@@ -143,11 +145,13 @@ class WalletError(BitcoinException):
     """
 SendError = WalletError  # Backwards compatibility
 
+
 class InsufficientFunds(WalletError):
     """
     Insufficient funds to complete transaction in wallet or account
     """
-    
+
+
 class InvalidAccountName(WalletError):
     """
     Invalid account name
@@ -189,7 +193,7 @@ class WalletAlreadyUnlocked(WalletError):
     Wallet is already unlocked
     """
 
-    
+
 # For convenience, we define more specific exception classes
 # for the more common errors.
 _exception_map = {

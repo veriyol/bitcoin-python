@@ -77,7 +77,9 @@ class HTTPTransport(object):
                 'code': -342, 'message': 'missing HTTP response from server'})
         elif httpresp.status == httplib.FORBIDDEN:
             msg = "bitcoind returns 403 Forbidden. Is your IP allowed?"
-            raise TransportException(msg, code = 403, protocol = "HTTP", raw_detail = httpresp)
+            raise TransportException(msg, code=403,
+                                     protocol=self.parsed_url.scheme,
+                                     raw_detail=httpresp)
 
         resp = httpresp.read()
         return resp.decode('utf8')
