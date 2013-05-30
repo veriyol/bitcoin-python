@@ -594,3 +594,14 @@ class BitcoinConnection(object):
             if dont_raise and isinstance(exception, WalletPassphraseIncorrect):
                 return False
             raise exception
+            
+    def dumpprivkey(self, address):
+        """
+        Returns the private key belonging to <address>.
+
+        Arguments:
+
+        - *address* -- Bitcoin address whose private key should be returned.
+        """
+        return self.proxy.dumpprivkey(address)
+        
