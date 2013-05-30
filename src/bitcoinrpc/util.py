@@ -35,7 +35,7 @@ class DStruct(object):
         if len(args_t) > len(self._fields):
             raise TypeError("Number of arguments is larger than of predefined fields")
         # Copy default values
-        for (k, v) in self._defaults.iteritems():
+        for (k, v) in self._defaults.items():
             self.__dict__[k] = copy(v)
         # Set pass by value arguments
         self.__dict__.update(zip(self._fields, args_t))
@@ -46,4 +46,4 @@ class DStruct(object):
         return '{module}.{classname}({slots})'.format(
             module=self.__class__.__module__, classname=self.__class__.__name__,
             slots=", ".join('{k}={v!r}'.format(k=k, v=v) for k, v in
-                            self.__dict__.iteritems()))
+                            self.__dict__.items()))
