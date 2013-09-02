@@ -6,9 +6,10 @@ Release process
 
 - Commit
 
-- Make tag
+- Make tag and upload to github
 
-    - git tag vX.X
+    - git tag -a vX.X
+    - git push origin vX.X
 
 - Run make in doc/
 

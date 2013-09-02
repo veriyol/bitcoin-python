@@ -36,10 +36,13 @@ def connect_to_local(filename=None):
     from bitcoinrpc.config import read_default_config
 
     cfg = read_default_config(filename)
+    if cfg is None:
+        cfg = {}
     port = int(cfg.get('rpcport', '18332' if cfg.get('testnet') else '8332'))
-    rcpuser = cfg.get('rpcuser', '')
+    rpcuser = cfg.get('rpcuser', '')
+    rpcpassword = cfg.get('rpcpassword', '')
 
-    return BitcoinConnection(rcpuser, cfg['rpcpassword'], 'localhost', port)
+    return BitcoinConnection(rpcuser, rpcpassword, 'localhost', port)
 
 
 def connect_to_remote(user, password, host='localhost', port=8332,
