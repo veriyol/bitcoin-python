@@ -268,6 +268,22 @@ class BitcoinConnection(object):
             return TransactionInfo(**self.proxy.getrawtransaction(txid, 1))
         return self.proxy.getrawtransaction(txid, 0)
 
+    def gettxout(self, txid, index, mempool=True):
+        """
+        Returns details about an unspent transaction output (UTXO)
+
+        Arguments:
+
+        - *txid* -- Transactiond id for which the info should be returned.
+        - *index* -- The output index.
+        - *mempool* -- Add memory pool transactions.
+        """
+        tx = self.proxy.gettxout(txid, index, mempool)
+        if tx != None:
+            return TransactionInfo(**tx)
+        else:
+            return TransactionInfo()
+
     def createrawtransaction(self, inputs, outputs):
         """
         Creates a raw transaction spending given inputs
