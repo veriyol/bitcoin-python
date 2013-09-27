@@ -610,7 +610,7 @@ class BitcoinConnection(object):
             if dont_raise and isinstance(exception, WalletPassphraseIncorrect):
                 return False
             raise exception
-            
+
     def dumpprivkey(self, address):
         """
         Returns the private key belonging to <address>.
@@ -620,4 +620,29 @@ class BitcoinConnection(object):
         - *address* -- Bitcoin address whose private key should be returned.
         """
         return self.proxy.dumpprivkey(address)
-        
+
+    def signmessage(self, address, message):
+        """
+        Sign messages, returns the signature
+
+        :param address: Bitcoin address used to sign a message
+        :type address: str or unicode
+        :param message: The message to sign
+        :type message: str or unicode
+        :rtype: unicode
+        """
+        return self.proxy.signmessage(address, message)
+
+    def verifymessage(self, address, signature, message):
+        """
+        Verify a signed message
+
+        :param address: Bitcoin address used to sign a message
+        :type address: str or unicode
+        :param signature: The signature
+        :type signature: unicode
+        :param message: The message to sign
+        :type message: str or unicode
+        :rtype: bool
+        """
+        return self.proxy.verifymessage(address, signature, message)
