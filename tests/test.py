@@ -3,27 +3,45 @@ Test script
 *WARNING* Don't run this on a production bitcoin server! *WARNING*
 Only on the test network.
 '''
+import argparse
 import sys
 sys.path.append('../src')
 
 import bitcoinrpc
-# from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds 
+# from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds
 
 from decimal import Decimal
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--config', help="Specify configuration file")
+parser.add_argument('--nolocal', help="Don't use connect_to_local",
+                    action='store_true')
+parser.add_argument('--noremote', help="Don't use connect_to_remote",
+                    action='store_true')
+args = parser.parse_args()
+
 if __name__ == "__main__":
 
-    from bitcoinrpc.config import read_default_config
-    cfg = read_default_config(None)
+    if args.config:
+        from bitcoinrpc.config import read_config_file
+        cfg = read_config_file(args.config)
+    else:
+        from bitcoinrpc.config import read_default_config
+        cfg = read_default_config(None)
     port = int(cfg.get('rpcport', '18332' if cfg.get('testnet') else '8332'))
     rpcuser = cfg.get('rpcuser', '')
 
-    local_conn = bitcoinrpc.connect_to_local()  # will use read_default_config
-    remote_conn = bitcoinrpc.connect_to_remote(
-            user=rpcuser, password=cfg['rpcpassword'], host='localhost', 
-            port=port, use_https=False)
+    connections = []
+    if not args.nolocal:
+        local_conn = bitcoinrpc.connect_to_local()  # will use read_default_config
+        connections.append(local_conn)
+    if not args.noremote:
+        remote_conn = bitcoinrpc.connect_to_remote(
+                user=rpcuser, password=cfg['rpcpassword'], host='localhost',
+                port=port, use_https=False)
+        connections.append(remote_conn)
 
-    for conn in (local_conn, remote_conn):
+    for conn in connections:
         assert(conn.getinfo().testnet) # don't test on prodnet
 
         assert(type(conn.getblockcount()) is int)
@@ -40,7 +58,7 @@ if __name__ == "__main__":
         conn.setaccount(bitcoinaddress, account)
         address = conn.getaccountaddress(account)
         address2 = conn.getaccountaddress(account2)
-        assert(conn.getaccount(address) == account) 
+        assert(conn.getaccount(address) == account)
         addresses = conn.getaddressesbyaccount(account)
         assert(address in addresses)
         #conn.sendtoaddress(bitcoinaddress, amount, comment=None, comment_to=None)
@@ -67,7 +85,7 @@ if __name__ == "__main__":
     print "Blocks: %i" % info.blocks
     print "Connections: %i" % info.connections
     print "Difficulty: %f" % info.difficulty
-    
+
     m_info = conn.getmininginfo()
     print ("Pooled Transactions: {pooledtx}\n"
            "Testnet: {testnet}\n"
