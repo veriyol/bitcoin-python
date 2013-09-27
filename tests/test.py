@@ -1,3 +1,4 @@
+# coding=utf-8
 '''
 Test script
 *WARNING* Don't run this on a production bitcoin server! *WARNING*
@@ -71,6 +72,10 @@ if __name__ == "__main__":
         assert(x.isvalid == True)
         x = conn.validateaddress("invalid")
         assert(x.isvalid == False)
+        messages = ('Hello, world!', u'かたな')
+        for message in messages:
+            signature = conn.signmessage(bitcoinaddress, message)
+            assert(conn.verifymessage(bitcoinaddress, signature, message) is True)
 
         for accid in conn.listaccounts(as_dict=True).iterkeys():
           tx = conn.listtransactions(accid)
