@@ -14,7 +14,9 @@ from decimal import Decimal
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', help="Specify configuration file")
-parser.add_argument('--nolocal', help="Don't use local bitcoin install",
+parser.add_argument('--nolocal', help="Don't use connect_to_local",
+                    action='store_true')
+parser.add_argument('--noremote', help="Don't use connect_to_remote",
                     action='store_true')
 args = parser.parse_args()
 
@@ -33,10 +35,11 @@ if __name__ == "__main__":
     if not args.nolocal:
         local_conn = bitcoinrpc.connect_to_local()  # will use read_default_config
         connections.append(local_conn)
-    remote_conn = bitcoinrpc.connect_to_remote(
-            user=rpcuser, password=cfg['rpcpassword'], host='localhost',
-            port=port, use_https=False)
-    connections.append(remote_conn)
+    if not args.noremote:
+        remote_conn = bitcoinrpc.connect_to_remote(
+                user=rpcuser, password=cfg['rpcpassword'], host='localhost',
+                port=port, use_https=False)
+        connections.append(remote_conn)
 
     for conn in connections:
         assert(conn.getinfo().testnet) # don't test on prodnet
