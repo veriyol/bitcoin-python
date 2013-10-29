@@ -9,7 +9,8 @@ import sys
 sys.path.append('../src')
 
 import bitcoinrpc
-# from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds
+from bitcoinrpc.exceptions import BitcoinException, InsufficientFunds
+
 
 from decimal import Decimal
 
@@ -85,6 +86,12 @@ if __name__ == "__main__":
             assert(txdata.txid == tx[0].txid)
 
         assert(type(conn.listunspent()) is list)  # needs better testing
+
+        try:
+            conn.sendtoaddress(bitcoinaddress, 10000000)
+            assert(0)  # Should raise InsufficientFunds
+        except InsufficientFunds:
+            pass
 
     info = conn.getinfo()
     print "Blocks: %i" % info.blocks
