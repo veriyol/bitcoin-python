@@ -89,6 +89,7 @@ if __name__ == "__main__":
 
         try:
             conn.sendtoaddress(bitcoinaddress, 10000000)
+            assert(0)  # Should raise InsufficientFunds
         except InsufficientFunds:
             pass
 
