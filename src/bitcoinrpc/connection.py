@@ -400,7 +400,7 @@ class BitcoinConnection(object):
         - *from_* -- Skip the first <from_> transactions.
         - *address* -- Receive address to consider
         """
-        accounts = [account] if account is not None else self.listaccounts(as_dict=True).iterkeys()
+        accounts = [account] if account is not None else self.listaccounts(as_dict=True).keys()
         return [TransactionInfo(**tx) for acc in accounts for
                 tx in self.proxy.listtransactions(acc, count, from_) if
                 address is None or tx["address"] == address]
