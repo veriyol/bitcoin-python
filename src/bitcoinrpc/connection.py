@@ -33,8 +33,6 @@ class BitcoinConnection(object):
     A BitcoinConnection object defines a connection to a bitcoin server.
     It is a thin wrapper around a JSON-RPC API connection.
 
-    Up-to-date for SVN revision 198.
-
     Arguments to constructor:
 
     - *user* -- Authenticate as user.
@@ -204,7 +202,7 @@ class BitcoinConnection(object):
         Arguments:
 
         - *bitcoinaddress* -- Bitcoin address to send to.
-        - *amount* -- Amount to send (float, rounded to the nearest 0.01).
+        - *amount* -- Amount to send (float, rounded to the nearest 0.00000001).
         - *minconf* -- Minimum number of confirmations required for transferred balance.
         - *comment* -- Comment for transaction.
         - *comment_to* -- Comment for to-address.
