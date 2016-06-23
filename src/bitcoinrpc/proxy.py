@@ -35,7 +35,7 @@ from bitcoinrpc.exceptions import TransportException
 
 USER_AGENT = "AuthServiceProxy/0.1"
 
-HTTP_TIMEOUT = 30
+HTTP_TIMEOUT = 60
 
 
 class JSONRPCException(Exception):
